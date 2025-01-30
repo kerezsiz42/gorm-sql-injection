@@ -27,16 +27,18 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-The next two images show the execution of this attack from the the malicious user's and the server perspective. The running SQL strings are all printed out the console, so that we can follow the pairwise request and response in terms of what is happening with the database.
+The next two images show the execution of this attack from the the malicious user and the server perspective. The running SQL strings are all printed out the console, so that we can follow the pairwise request and response in terms of what is happening with the database.
 
 ![Malicious User's Terminal](images/client_terminal.png "Malicious User's Terminal")
 
-The user first asks for a product by its code "D42" and receives the associated data. Since the "code" query param is not sanitized and the Gorm command is implemented incorrectly, they can perform an SQL injection attack, which is the "str'; DELETE FROM `products` --" string in this case. The first part of this string of characters closes the original command, after which a new SQL command can be injected and the remaining part of the original string is then commented out using the "--" characters, making the second malicious command runnable.
+The user first requests a product using its code, "D42," and receives the associated data. However, because the "code" query parameter is not sanitized and the Gorm command is implemented incorrectly, an SQL injection attack can be executed. In this case, the attack string is "str'; DELETE FROM products --." The first part of this string closes the original command, allowing a new SQL command to be injected. The remaining part of the original string is then commented out using the "--" characters, making the second malicious command executable.
 
-Subsequent calls to get the product data return no result, which means that all those recources have been deleted, so the attack was effective.
+Subsequent calls to get the product data return no result, which means that all those resources have been deleted, so the attack was effective.
 
 ![Server Terminal](images/server_terminal.png "Server Terminal")
 
 Similar avoidable usages are described in the original Gorm documentation: <https://gorm.io/docs/security.html>
+
 More examples for harmful strings: <https://owasp.org/www-community/attacks/SQL_Injection>
-The source code of this example can be found at <https://github.com/kerezsiz42/gorm-sql-injection>.
+
+The source code of this example can be found at <https://github.com/kerezsiz42/gorm-sql-injection>
