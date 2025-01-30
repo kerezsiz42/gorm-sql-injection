@@ -38,5 +38,5 @@ Subsequent calls to get the product data return no result, which means that all 
 ![Server Terminal](images/server_terminal.png "Server Terminal")
 
 Similar avoidable usages are described in the original Gorm documentation: <https://gorm.io/docs/security.html>
-
+More examples for harmful strings: <https://owasp.org/www-community/attacks/SQL_Injection>
 The source code of this example can be found at <https://github.com/kerezsiz42/gorm-sql-injection>.
