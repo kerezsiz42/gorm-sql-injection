@@ -7,6 +7,9 @@ A common response to raising awareness about this issue is that potentially harm
 
 The following piece of code shows a vulnerable HTTP handler, using which a malicious user can effectively clear the entire production database of a web service with only a few HTTP calls:
 
+![Vulnerable Handler](images/vulnerable_handler.png "Vulnerable Handler")
+
+
 ```go
 // Run arbitrary SQL command using the following pattern:
 // curl "http://localhost:8080/?code=$(printf "str'; DELETE FROM `products` --" | jq -sRr @uri)"
