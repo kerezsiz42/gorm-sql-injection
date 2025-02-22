@@ -1,9 +1,9 @@
-# Preventable SQL Vulnerabilities
+# Your service might have this vulnerability too
 
-I have encountered easily preventable SQL vulnerabilities multiple times during my relatively short career as a software developer, which I find quite disturbing. There is a single golden rule: once you see string manipulation of SQL commands being done using common methods, such as the fmt package in Go or the built-in string interpolation syntax of other languages, you should start to be suspicious.
+I have encountered easily preventable SQL injection vulnerabilities multiple times during my relatively short career as a software developer, which I find quite disturbing. Fortunately, we took the effort and fixed them all. There is a single golden rule: once you see string manipulation of SQL commands being done using common methods, such as the fmt package in Go or the built-in string interpolation syntax of other languages, you should start to be suspicious.
 While these methods may be acceptable in other contexts, they are not sufficient when it comes to database commands, as they bypass the built-in sanitization process of the database driver.
 
-A common response to raising awareness about this issue is that potentially harmful user input is already validated elsewhere. While this may be true at the moment, who can say whether that will remain the case in the next five years or beyond? Implementing software with this in mind should be the norm for any type of software developer, whether they work for big-tech or for a smaller consulting company.
+A common response to raising awareness about this issue is that potentially harmful user input is already validated elsewhere. While this may be true at the moment, who can say whether that will remain the case in the next five years or beyond? Implementing software with this in mind should be the norm for any type of software developer.
 
 The following piece of code shows a vulnerable HTTP handler, using which a malicious user can effectively clear the entire production database of a web service with only a few HTTP calls:
 
@@ -41,4 +41,4 @@ Similar avoidable usages are described in the original Gorm documentation: <http
 
 More examples for harmful strings: <https://owasp.org/www-community/attacks/SQL_Injection>
 
-The source code of this example can be found at <https://github.com/kerezsiz42/gorm-sql-injection>
+The source code of this example can be found at <https://github.com/zkerezsi/gorm-sql-injection>
